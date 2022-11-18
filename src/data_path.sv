@@ -18,7 +18,7 @@ import k_and_s_pkg::*;
     output logic                    signed_overflow,
     output logic              [4:0] ram_addr,
     output logic             [15:0] data_out,
-    input  logic             [15:0] data_in
+    input  logic             [15:0] data_in,
 
     input logic [4:0] B
 );
