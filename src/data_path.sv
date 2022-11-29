@@ -172,7 +172,7 @@ end
 logic [15:0] r [4] = '{ default: 8'd87}; 
 
 always_ff @(posedge clk) begin 
-    if(rst_n) begin
+    if(!rst_n) begin
         r[0] = 15'b000000000000000;
         r[1] = 15'b000000000000000;
         r[2] = 15'b000000000000000;

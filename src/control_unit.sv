@@ -76,6 +76,7 @@ always_comb begin : calc_next_state
 
                 I_LOAD : begin
                     next_state = LOAD_RAM;
+                    addr_sel = 1'b1;
                 end
 
                 I_OR : begin
@@ -139,10 +140,6 @@ always_comb begin : calc_next_state
                         next_state = BRANCH;
                 end
 
-                I_NOP : begin
-                    next_state = BUSCA_INSTR;
-                end
-
                 I_BOV : begin
                     next_state = BUSCA_INSTR;
                     if(unsigned_overflow)
@@ -167,9 +164,8 @@ always_comb begin : calc_next_state
 
         LOAD_RAM : begin
             next_state = BUSCA_INSTR;
-            c_sel = 1'b0;
-            ir_enable = 1'b0;
             write_reg_enable = 1'b1;
+            addr_sel = 1'b1;
         end
 
         ALU_CALC : begin
