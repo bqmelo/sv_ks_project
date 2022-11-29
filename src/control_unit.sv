@@ -27,7 +27,7 @@ typedef enum {
     DECODIFICA,
     LOAD_RAM,
     ALU_CALC,
-    ESCREVE_RAM,
+    STORE_RAM,
     BRANCH,
     FIM_PROGRAMA
 } state_t;
@@ -105,11 +105,13 @@ always_comb begin : calc_next_state
 
                 I_MOVE : begin
                     next_state = ALU_CALC;
+                    operation = 2'b00;
                     flags_reg_enable = 1'b0;
                 end
 
                 I_STORE : begin
-                    next_state = ESCREVE_RAM;
+                    next_state = STORE_RAM;
+                    addr_sel = 1'b1;
                 end
 
                 I_BRANCH : begin
@@ -170,16 +172,16 @@ always_comb begin : calc_next_state
 
         ALU_CALC : begin
             next_state = BUSCA_INSTR;
-            ir_enable = 1'b0;
+            ir_enable = 1'b1;
             c_sel = 1'b1;
             write_reg_enable = 1'b1;
         end
 
-        ESCREVE_RAM : begin
+        STORE_RAM : begin
             next_state = BUSCA_INSTR;
             ram_write_enable = 1'b1;
             addr_sel = 1'b1;
-            ir_enable = 1'b0;
+            write_reg_enable = 1'b1;
         end
 
         FIM_PROGRAMA : begin
