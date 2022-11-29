@@ -152,7 +152,6 @@ always_comb begin : calc_next_state
                     next_state = BUSCA_INSTR;
                     if(!unsigned_overflow)
                         next_state = BRANCH;
-                        
                 end
             endcase
         end
